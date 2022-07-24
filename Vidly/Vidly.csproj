@@ -212,6 +212,10 @@
     <Compile Include="Migrations\202207242041277_SeedingMovieGenres.designer.cs">
       <DependentUpon>202207242041277_SeedingMovieGenres.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202207242130121_MovieGenreNameUpdate.cs" />
+    <Compile Include="Migrations\202207242130121_MovieGenreNameUpdate.designer.cs">
+      <DependentUpon>202207242130121_MovieGenreNameUpdate.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Customer.cs" />
@@ -331,6 +335,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202207242041277_SeedingMovieGenres.resx">
       <DependentUpon>202207242041277_SeedingMovieGenres.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202207242130121_MovieGenreNameUpdate.resx">
+      <DependentUpon>202207242130121_MovieGenreNameUpdate.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Web.Mvc;
 using Vidly.Models;
@@ -20,26 +21,25 @@ namespace Vidly.Controllers
             _context.Dispose();
         }
 
-        private IQueryable<Customer> GetCustomers()
+        private IEnumerable<Customer> GetCustomers()
         {
-            return _context.Customers;
-            // return new List<Customer>()
-            // {
-            //     new Customer() { Id = 1, Name = "John Smith" },
-            //     new Customer() { Id = 2, Name = "Mary Williams" }
-            // };
+            return new List<Customer>()
+            {
+                new Customer() { Id = 1, Name = "John Smith" },
+                new Customer() { Id = 2, Name = "Mary Williams" }
+            };
         }
 
         // GET
         public ViewResult Index()
         {
-            var customers = GetCustomers().ToList();
+            var customers = _context.Customers.Include(p => p.MembershipType).ToList();
             return View(customers);
         }
 
         public ActionResult Details(int id)
         {
-            var customer = GetCustomers().SingleOrDefault(p => p.Id == id);
+            var customer = _context.Customers.SingleOrDefault(p => p.Id == id);
             if (customer == null) return HttpNotFound();
 
             return View(customer);

@@ -1,5 +1,5 @@
-﻿@using Vidly.ViewModels
-@model MoviesViewModel
+﻿@using Vidly.Models
+@model IEnumerable<Movie>
 
 @{
     ViewBag.Title = "Customers";
@@ -8,7 +8,7 @@
 
 <h2>Movies</h2>
 
-@if (Model.Movies.Count == 0)
+@if (!Model.Any())
 {
     <text>We don't have any movie yet.</text>
 }
@@ -21,7 +21,7 @@ else
         </tr>
         </thead>
         <tbody>
-        @foreach (var movie in Model.Movies)
+        @foreach (var movie in Model)
         {
             <tr>
                 <td>@Html.ActionLink(movie.Name, "Details", new { id = movie.Id })</td>

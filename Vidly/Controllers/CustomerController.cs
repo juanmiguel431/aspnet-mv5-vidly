@@ -8,22 +8,25 @@ namespace Vidly.Controllers
 {
     public class CustomerController : Controller
     {
-        private List<Customer> Customers { get; } = new List<Customer>()
+        private IEnumerable<Customer> GetCustomers()
         {
-            new Customer() { Id = 1, Name = "John Smith" },
-            new Customer() { Id = 2, Name = "Mary Williams" }
-        };
+            return new List<Customer>()
+            {
+                new Customer() { Id = 1, Name = "John Smith" },
+                new Customer() { Id = 2, Name = "Mary Williams" }
+            };
+        }
 
         // GET
         public ViewResult Index()
         {
-            var model = new CustomerViewModel() { Customers = Customers };
-            return View(model);
+            var customers = GetCustomers();
+            return View(customers);
         }
 
         public ActionResult Details(int id)
         {
-            var customer = Customers.FirstOrDefault(p => p.Id == id);
+            var customer = GetCustomers().SingleOrDefault(p => p.Id == id);
             if (customer == null) return HttpNotFound();
 
             return View(customer);

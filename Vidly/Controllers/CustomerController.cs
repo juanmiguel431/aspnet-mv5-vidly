@@ -2,7 +2,6 @@
 using System.Linq;
 using System.Web.Mvc;
 using Vidly.Models;
-using Vidly.ViewModels;
 
 namespace Vidly.Controllers
 {
@@ -21,9 +20,9 @@ namespace Vidly.Controllers
             _context.Dispose();
         }
 
-        private IEnumerable<Customer> GetCustomers()
+        private IQueryable<Customer> GetCustomers()
         {
-            return _context.Customers.ToList();
+            return _context.Customers;
             // return new List<Customer>()
             // {
             //     new Customer() { Id = 1, Name = "John Smith" },
@@ -34,7 +33,7 @@ namespace Vidly.Controllers
         // GET
         public ViewResult Index()
         {
-            var customers = GetCustomers();
+            var customers = GetCustomers().ToList();
             return View(customers);
         }
 

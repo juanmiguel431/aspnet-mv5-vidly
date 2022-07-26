@@ -15,7 +15,7 @@ namespace Vidly.Models
         
         public MovieGenre MovieGenre { get; set; }
         
-        [Required, Display(Name = "Movie genre")]
+        [Required, Display(Name = "Genre")]
         public byte MovieGenreId { get; set; }
         
         [Required, Display(Name = "Release date")]
@@ -23,7 +23,7 @@ namespace Vidly.Models
         
         public DateTime AddedDate { get; set; }
         
-        [Required, Range(0, int.MaxValue)]
+        [Required, Range(0, int.MaxValue), Display(Name = "Number in stock")]
         public int Stock { get; set; }
     }
 }

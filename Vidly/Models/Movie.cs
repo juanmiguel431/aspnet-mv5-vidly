@@ -12,12 +12,18 @@ namespace Vidly.Models
         
         [Required]
         public string Name { get; set; }
+        
         public MovieGenre MovieGenre { get; set; }
+        
+        [Required, Display(Name = "Movie genre")]
         public byte MovieGenreId { get; set; }
+        
+        [Required, Display(Name = "Release date")]
         public DateTime ReleasedDate { get; set; }
+        
         public DateTime AddedDate { get; set; }
         
-        [Range(0, int.MaxValue)]
+        [Required, Range(0, int.MaxValue)]
         public int Stock { get; set; }
     }
 }

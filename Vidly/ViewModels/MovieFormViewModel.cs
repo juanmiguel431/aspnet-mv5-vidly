@@ -24,5 +24,18 @@ namespace Vidly.ViewModels
         public int? Stock { get; set; }
 
         public string Title => Id.HasValue ? "Edit movie" : "New movie";
+
+        public MovieFormViewModel()
+        {
+        }
+        
+        public MovieFormViewModel(Movie movie)
+        {
+            Id = movie.Id;
+            Name = movie.Name;
+            Stock = movie.Stock;
+            ReleasedDate = movie.ReleasedDate;
+            MovieGenreId = movie.MovieGenreId;
+        }
     }
 }

@@ -98,14 +98,9 @@ namespace Vidly.Controllers
             
             var movieGenres = _context.MovieGenres.ToList();
             
-            var model = new MovieFormViewModel
+            var model = new MovieFormViewModel(movie)
             {
                 MovieGenres = movieGenres,
-                Id = movie.Id,
-                Name = movie.Name,
-                Stock = movie.Stock,
-                ReleasedDate = movie.ReleasedDate,
-                MovieGenreId = movie.MovieGenreId,
             };
             return View("MovieForm", model);
         }

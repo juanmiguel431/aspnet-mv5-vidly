@@ -30,7 +30,7 @@ namespace Vidly.Controllers
 
             var model = new MovieFormViewModel
             {
-                MovieGenres = movieGenres
+                MovieGenres = movieGenres,
             };
             return View("MovieForm", model);
         }
@@ -101,7 +101,11 @@ namespace Vidly.Controllers
             var model = new MovieFormViewModel
             {
                 MovieGenres = movieGenres,
-                Movie = movie
+                Id = movie.Id,
+                Name = movie.Name,
+                Stock = movie.Stock,
+                ReleasedDate = movie.ReleasedDate,
+                MovieGenreId = movie.MovieGenreId,
             };
             return View("MovieForm", model);
         }
@@ -147,31 +151,34 @@ namespace Vidly.Controllers
         }
 
         [HttpPost, ValidateAntiForgeryToken]
-        public ActionResult Save(Movie movie)
+        public ActionResult Save(MovieFormViewModel viewModel)
         {
             if (!ModelState.IsValid)
             {
-                var viewModel = new MovieFormViewModel
-                {
-                    Movie = movie,
-                    MovieGenres = _context.MovieGenres.ToList()
-                };
-                
+                viewModel.MovieGenres = _context.MovieGenres.ToList();
                 return View("MovieForm", viewModel);
             }
-            
-            if (movie.Id == 0)
+
+            if (viewModel.Id == null)
             {
-                movie.AddedDate = DateTime.UtcNow;
+                var movie = new Movie
+                {
+                    Name = viewModel.Name,
+                    Stock = viewModel.Stock ?? 0,
+                    ReleasedDate = viewModel.ReleasedDate ?? DateTime.MinValue,
+                    MovieGenreId = viewModel.MovieGenreId ?? 0,
+                    AddedDate = DateTime.UtcNow
+                };   
+                
                 _context.Movies.Add(movie);
             }
             else
             {
-                var movieInDb = _context.Movies.Single(p => p.Id == movie.Id);
-                movieInDb.Name = movie.Name;
-                movieInDb.MovieGenreId = movie.MovieGenreId;
-                movieInDb.ReleasedDate = movie.ReleasedDate;
-                movieInDb.Stock = movie.Stock;
+                var movieInDb = _context.Movies.Single(p => p.Id == viewModel.Id);
+                movieInDb.Name = viewModel.Name;
+                movieInDb.MovieGenreId = viewModel.MovieGenreId ?? 0;
+                movieInDb.ReleasedDate = viewModel.ReleasedDate ?? DateTime.MinValue;
+                movieInDb.Stock = viewModel.Stock ?? 0;
             }
 
             try

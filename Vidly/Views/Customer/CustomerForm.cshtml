@@ -23,7 +23,7 @@
     </div>
     <div class="form-group">
         <label for="@nameof(Model.Customer)_@nameof(Model.Customer.Birthdate)">Date of birth</label>
-        @Html.TextBoxFor(p => p.Customer.Birthdate, "{0:dd/MM/yyyy}", new { @class = "form-control" })
+        @Html.TextBoxFor(p => p.Customer.Birthdate, "{0:MM/dd/yyyy}", new { @class = "form-control" })
         @Html.ValidationMessageFor(p => p.Customer.Birthdate)
     </div>
     <div class="checkbox">

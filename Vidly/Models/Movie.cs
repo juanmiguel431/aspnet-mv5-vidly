@@ -10,7 +10,7 @@ namespace Vidly.Models
     {
         public int Id { get; set; }
         
-        [Required]
+        [Required(ErrorMessage = "Please enter movie's name")]
         public string Name { get; set; }
         
         public MovieGenre MovieGenre { get; set; }

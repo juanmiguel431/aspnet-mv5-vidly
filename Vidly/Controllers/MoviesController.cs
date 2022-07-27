@@ -166,7 +166,7 @@ namespace Vidly.Controllers
             {
                 _context.SaveChanges();
             }
-            catch (DbEntityValidationException e)
+            catch (DbEntityValidationException)
             {
                 throw;
             }

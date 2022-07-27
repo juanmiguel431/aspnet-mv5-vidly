@@ -11,7 +11,6 @@
 @using (Html.BeginForm("Save", "Customer"))
 {
     @Html.ValidationSummary(true, "Please, fix the following errors.")
-    @Html.HiddenFor(p => p.Customer.Id)
     <div class="form-group">
         @Html.LabelFor(p => p.Customer.Name)
         @Html.TextBoxFor(p => p.Customer.Name, new { @class = "form-control" })
@@ -32,6 +31,8 @@
             @Html.CheckBoxFor(p => p.Customer.IsSubscribedToNewsLetter) Subscribed to newslatter?
         </label>
     </div>
+    @Html.HiddenFor(p => p.Customer.Id)
+    @Html.AntiForgeryToken()
     <button class="btn btn-primary" type="submit">Save</button>
 }
 

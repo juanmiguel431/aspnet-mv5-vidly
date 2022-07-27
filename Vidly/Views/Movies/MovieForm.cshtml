@@ -10,7 +10,6 @@
 
 @using (Html.BeginForm("Save", "Movies"))
 {
-    @Html.HiddenFor(p => p.Movie.Id)
     <div class="form-group">
         @Html.LabelFor(p => p.Movie.Name)
         @Html.TextBoxFor(p => p.Movie.Name, new { @class = "form-control" })
@@ -31,5 +30,7 @@
         @Html.TextBoxFor(p => p.Movie.Stock, new { @class = "form-control" })
         @Html.ValidationMessageFor(p => p.Movie.Stock)
     </div>
+    @Html.HiddenFor(p => p.Movie.Id)
+    @Html.AntiForgeryToken()
     <button class="btn btn-primary" type="submit">Save</button>
 }

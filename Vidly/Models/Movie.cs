@@ -23,7 +23,7 @@ namespace Vidly.Models
         
         public DateTime AddedDate { get; set; }
         
-        [Required, Range(0, int.MaxValue), Display(Name = "Number in stock")]
+        [Required, Range(0, 500), Display(Name = "Number in stock")]
         public int Stock { get; set; }
     }
 }

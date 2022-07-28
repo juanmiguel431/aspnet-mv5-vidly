@@ -17,13 +17,13 @@ namespace Vidly.Controllers.Api
         }
 
         // GET api/customers
-        public IEnumerable<Customer> GetCustomers()
+        public IEnumerable<Customer> GetAll()
         {
             return _context.Customers.ToList();
         }
         
         // GET api/customers/1
-        public Customer GetCustomer(int id)
+        public Customer GetById(int id)
         {
             var customer = _context.Customers.SingleOrDefault(p => p.Id == id);
 
@@ -35,7 +35,7 @@ namespace Vidly.Controllers.Api
         
         // POST api/customers
         [HttpPost]
-        public Customer CreateCustomer(Customer customer)
+        public Customer Create(Customer customer)
         {
             if (!ModelState.IsValid)
                 throw new HttpResponseException(HttpStatusCode.BadRequest);
@@ -48,7 +48,7 @@ namespace Vidly.Controllers.Api
         
         // PUT api/customers/1
         [HttpPut]
-        public Customer UpdateCustomer(int id, Customer customer)
+        public Customer Update(int id, Customer customer)
         {
             if (!ModelState.IsValid)
                 throw new HttpResponseException(HttpStatusCode.BadRequest);
@@ -70,7 +70,7 @@ namespace Vidly.Controllers.Api
         
         // DELETE api/customers/1
         [HttpDelete]
-        public void DeleteCustomer(int id)
+        public void Delete(int id)
         {
             var customerInDb = _context.Customers.SingleOrDefault(c => c.Id == id);
 

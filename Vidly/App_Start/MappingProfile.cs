@@ -8,9 +8,8 @@ namespace Vidly
     {
         public MappingProfile()
         {
-            CreateMap<Customer, CustomerDto>()
-                .ForMember(p => p.Id, opt => opt.Ignore())
-                .ReverseMap();
+            CreateMap<CustomerDto, Customer>().ForMember(p => p.Id, opt => opt.Ignore());
+            CreateMap<Customer, CustomerDto>();
             
             CreateMap<MovieDto, Movie>().ForMember(p => p.Id, opt => opt.Ignore());
             CreateMap<Movie, MovieDto>();

@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Vidly.Models
 {
-    public class Customer
+    public class Customer : ICustomer
     {
         public int Id { get; set; }
         
@@ -17,5 +17,11 @@ namespace Vidly.Models
         
         [Min18YearsIfAMember, Display(Name = "Date of birth")]
         public DateTime? Birthdate { get; set; }
+    }
+
+    public interface ICustomer
+    {
+        byte MembershipTypeId { get; set; }
+        DateTime? Birthdate { get; set; }
     }
 }

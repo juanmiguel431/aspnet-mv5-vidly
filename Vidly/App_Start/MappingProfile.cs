@@ -11,6 +11,10 @@ namespace Vidly
             CreateMap<Customer, CustomerDto>()
                 .ForMember(p => p.Id, opt => opt.Ignore())
                 .ReverseMap();
+            
+            CreateMap<Movie, MovieDto>()
+                .ForMember(p => p.Id, opt => opt.Ignore())
+                .ReverseMap();
         }
     }
 }

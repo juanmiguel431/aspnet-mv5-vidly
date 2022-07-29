@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Web.Http;
-using MapsterMapper;
+using AutoMapper;
 using Vidly.Dtos;
 using Vidly.Models;
 

@@ -68,6 +68,7 @@ namespace Vidly.Controllers.Api
                 throw new HttpResponseException(HttpStatusCode.NotFound);
 
             _mapper.Map(customerDto, customerInDb);
+            customerInDb.Id = id;
 
             _context.SaveChanges();
 

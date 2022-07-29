@@ -27,32 +27,36 @@ namespace Vidly.Controllers.Api
         }
         
         // GET api/customers/1
-        public Customer GetById(int id)
+        public CustomerDto GetById(int id)
         {
             var customer = _context.Customers.SingleOrDefault(p => p.Id == id);
 
             if (customer == null)
                 throw new HttpResponseException(HttpStatusCode.NotFound);
 
-            return customer;
+            return _mapper.Map<CustomerDto>(customer);
         }
         
         // POST api/customers
         [HttpPost]
-        public Customer Create(Customer customer)
+        public CustomerDto Create(CustomerDto customerDto)
         {
             if (!ModelState.IsValid)
                 throw new HttpResponseException(HttpStatusCode.BadRequest);
 
+            var customer = _mapper.Map<Customer>(customerDto);
+            
             _context.Customers.Add(customer);
             _context.SaveChanges();
 
-            return customer;
+            customerDto.Id = customer.Id;
+            
+            return customerDto;
         }
         
         // PUT api/customers/1
         [HttpPut]
-        public Customer Update(int id, Customer customer)
+        public CustomerDto Update(int id, CustomerDto customerDto)
         {
             if (!ModelState.IsValid)
                 throw new HttpResponseException(HttpStatusCode.BadRequest);
@@ -61,15 +65,12 @@ namespace Vidly.Controllers.Api
 
             if (customerInDb == null)
                 throw new HttpResponseException(HttpStatusCode.NotFound);
-            
-            customerInDb.Name = customer.Name;
-            customerInDb.Birthdate = customer.Birthdate;
-            customerInDb.MembershipTypeId = customer.MembershipTypeId;
-            customerInDb.IsSubscribedToNewsLetter = customer.IsSubscribedToNewsLetter;
-            
+
+            _mapper.Map(customerDto, customerInDb);
+
             _context.SaveChanges();
 
-            return customer;
+            return customerDto;
         }
         
         // DELETE api/customers/1

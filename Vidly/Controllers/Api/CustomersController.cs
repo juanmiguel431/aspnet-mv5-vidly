@@ -4,22 +4,26 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
+using AutoMapper;
+using Vidly.Dtos;
 using Vidly.Models;
 
 namespace Vidly.Controllers.Api
 {
     public class CustomersController : ApiController
     {
+        private readonly IMapper _mapper;
         private readonly ApplicationDbContext _context;
-        public CustomersController()
+        public CustomersController(IMapper mapper)
         {
+            _mapper = mapper;
             _context = new ApplicationDbContext();
         }
 
         // GET api/customers
-        public IEnumerable<Customer> GetAll()
+        public IEnumerable<CustomerDto> GetAll()
         {
-            return _context.Customers.ToList();
+            return _context.Customers.ToList().Select(c => _mapper.Map<CustomerDto>(c));
         }
         
         // GET api/customers/1

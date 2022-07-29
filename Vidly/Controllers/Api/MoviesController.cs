@@ -67,7 +67,10 @@ namespace Vidly.Controllers.Api
                 throw new HttpResponseException(HttpStatusCode.NotFound);
 
             _mapper.Map(movieDto, movie);
-            movie.Id = id;
+
+            _context.SaveChanges();
+            
+            movieDto.Id = id;
 
             return movieDto;
         }

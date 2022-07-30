@@ -27,7 +27,7 @@
     <script>
         $(document).ready(function () {
             const customerTable = $("#customers");
-            customerTable.DataTable({
+            const table = customerTable.DataTable({
                 ajax: {
                     url: 'api/customers',
                     dataSrc: ''
@@ -45,7 +45,7 @@
                     {
                         data: 'id',
                         render: function(id) {
-                          return `<button class="btn btn-danger js-delete" data-customer-id="${id}">Delete</button>`;
+                          return `<button class="btn-link js-delete" data-customer-id="${id}">Delete</button>`;
                         }
                     },
                 ]
@@ -58,7 +58,7 @@
                             url: `api/customers/${button.attr('data-customer-id')}`,
                             method: 'DELETE',
                             success: function () {
-                                button.parents('tr').remove();
+                                table.row(button.parents('tr')).remove().draw();
                             }
                         });
                     }

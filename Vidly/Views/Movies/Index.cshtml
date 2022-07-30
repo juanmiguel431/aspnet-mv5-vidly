@@ -11,41 +11,46 @@
 @Html.ActionLink("Add new", "New", "Movies", null, new { @class = "btn btn-primary"})
 <br>
 <br>
-@if (!Model.Any())
-{
-    <text>We don't have any movie yet.</text>
-}
-else
-{
-    <table id="movies" class="table table-bordered table-hover">
-        <thead>
-        <tr>
-            <th>Name</th>
-            <th>Genre</th>
-            <th>Delete</th>
-        </tr>
-        </thead>
-        <tbody>
-        @foreach (var movie in Model)
-        {
-            <tr>
-                <td>@Html.ActionLink(movie.Name, "Edit", new { id = movie.Id })</td>
-                <td>@movie.MovieGenre.Name</td>
-                <td>
-                    <button class="btn-link js-delete" data-movie-id="@movie.Id">Delete</button>
-                </td>
-            </tr>
-        }
-        </tbody>
-    </table>
-}
+<table id="movies" class="table table-bordered table-hover">
+    <thead>
+    <tr>
+        <th>Name</th>
+        <th>Genre</th>
+        <th>Delete</th>
+    </tr>
+    </thead>
+    <tbody>
+    </tbody>
+</table>
 
 @section scripts
 {
     <script>
         $(document).ready(function() {
             const movies = $("#movies");
-            const table = movies.DataTable();
+            const table = movies.DataTable({
+                ajax: {
+                    url: 'api/movies',
+                    dataSrc: '',
+                },
+                columns: [
+                    {
+                        data: 'name',
+                        render: function(data, type, movie) {
+                          return `<a href="movies/Edit/${movie.id}">${movie.name}</a>`;
+                        }
+                    },
+                    {
+                        data: 'movieGenre.name',
+                    },
+                    {
+                        data: 'id',
+                        render: function(id) {
+                          return `<button class="btn-link js-delete" data-movie-id="${id}">Delete</button>`;
+                        }
+                    }
+                ]
+            });
             
             movies.on("click", ".js-delete", function() {
                 const button = $(this);

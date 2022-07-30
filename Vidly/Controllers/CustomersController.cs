@@ -7,11 +7,11 @@ using Vidly.ViewModels;
 
 namespace Vidly.Controllers
 {
-    public class CustomerController : Controller
+    public class CustomersController : Controller
     {
         private readonly ApplicationDbContext _context;
 
-        public CustomerController()
+        public CustomersController()
         {
             _context = new ApplicationDbContext();
         }
@@ -70,14 +70,15 @@ namespace Vidly.Controllers
             }
 
             _context.SaveChanges();
-            return RedirectToAction("Index", "Customer");
+            return RedirectToAction("Index", "Customers");
         }
 
         // GET
         public ViewResult Index()
         {
-            var customers = _context.Customers.Include(p => p.MembershipType).ToList();
-            return View(customers);
+            // var customers = _context.Customers.Include(p => p.MembershipType).ToList();
+            // return View(customers);
+            return View();
         }
 
         public ActionResult Details(int id)

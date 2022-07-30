@@ -1,0 +1,69 @@
+﻿@using Vidly.Models
+@model IEnumerable<Customer>
+
+@{
+    ViewBag.Title = "Customers";
+    Layout = "../Shared/_Layout.cshtml";
+}
+
+<h2>Customers</h2>
+@Html.ActionLink("Add new", "New", "Customers", null, new { @class = "btn btn-primary" })
+<br>
+<br>
+<table id="customers" class="table table-bordered table-hover">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Membership Type</th>
+            <th>Delete</th>
+        </tr>
+    </thead>
+    <tbody>
+    </tbody>
+</table>
+
+@section scripts
+{
+    <script>
+        $(document).ready(function () {
+            const customerTable = $("#customers");
+            customerTable.DataTable({
+                ajax: {
+                    url: 'api/customers',
+                    dataSrc: ''
+                },
+                columns: [
+                    {
+                        data: 'name',
+                        render: function(data, type, customer) {
+                          return `<a href="/customer/edit/${customer.id}">${customer.name}</a>`;
+                        }
+                    },
+                    {
+                        data: 'name'
+                    },
+                    {
+                        data: 'id',
+                        render: function(id) {
+                          return `<button class="btn btn-danger js-delete" data-customer-id="${id}">Delete</button>`;
+                        }
+                    },
+                ]
+            });
+            customerTable.on('click', '.js-delete', function () {
+                const button = $(this);
+                bootbox.confirm('Are you sure you want to delete this customer?', function (result) {
+                    if (result) {
+                        $.ajax({
+                            url: `api/customers/${button.attr('data-customer-id')}`,
+                            method: 'DELETE',
+                            success: function () {
+                                button.parents('tr').remove();
+                            }
+                        });
+                    }
+                });
+            });
+        });
+    </script>
+}

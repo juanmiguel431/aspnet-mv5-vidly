@@ -8,12 +8,12 @@ using Vidly.Models;
 
 namespace Vidly.Controllers.Api
 {
-    public class RentalController : ApiController
+    public class RentalsController : ApiController
     {
         private readonly IMapper _mapper;
         private readonly ApplicationDbContext _context;
 
-        public RentalController(IMapper mapper)
+        public RentalsController(IMapper mapper)
         {
             _mapper = mapper;
             _context = new ApplicationDbContext();

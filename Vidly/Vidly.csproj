@@ -305,6 +305,10 @@
     <Compile Include="Migrations\202207310327404_AddDrivingLicenseToApplicationUser.designer.cs">
       <DependentUpon>202207310327404_AddDrivingLicenseToApplicationUser.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202208020120330_AddRentalModel.cs" />
+    <Compile Include="Migrations\202208020120330_AddRentalModel.designer.cs">
+      <DependentUpon>202208020120330_AddRentalModel.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\ApplicationUser.cs" />
     <Compile Include="Models\Customer.cs" />
@@ -699,6 +703,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202207310327404_AddDrivingLicenseToApplicationUser.resx">
       <DependentUpon>202207310327404_AddDrivingLicenseToApplicationUser.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202208020120330_AddRentalModel.resx">
+      <DependentUpon>202208020120330_AddRentalModel.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

@@ -11,8 +11,8 @@
         <input id="customer" type="text" class="form-control">
     </div>
     <div class="form-group">
-        <label for="">Movie</label>
-        <input type="text" class="form-control">
+        <label for="movie">Movie</label>
+        <input id="movie" type="text" class="form-control">
     </div>
     <button class="btn btn-primary">Submit</button>
 </form>
@@ -23,25 +23,46 @@
     $(document).ready(function() {
         let viewModel = {};
         
-          const customers = new Bloodhound({
+        const customers = new Bloodhound({
             datumTokenizer: Bloodhound.tokenizers.obj.whitespace('name'),
             queryTokenizer: Bloodhound.tokenizers.whitespace,
             remote: {
-              url: '/api/customers?query=%QUERY',
-              wildcard: '%QUERY'
+                url: '/api/customers?query=%QUERY',
+                wildcard: '%QUERY'
             }
-          });
+        });
           
-          $('#customer').typeahead({
+        $('#customer').typeahead({
             minLength: 3,
             highlight: true
-          }, {
+        }, {
             name: 'customers',
             display: 'name',
             source: customers
-          }).on('typeahead:select', function (e, customer){
-              viewModel.customerId = customer.id;
-          });
+        }).on('typeahead:select', function (e, customer){
+            viewModel.customerId = customer.id;
+        });
+          
+          
+        const movies = new Bloodhound({
+            datumTokenizer: Bloodhound.tokenizers.obj.whitespace('name'),
+            queryTokenizer: Bloodhound.tokenizers.whitespace,
+            remote: {
+                url: '/api/movies?search=%NAME',
+                wildcard: '%NAME'
+            }
+        });
+        
+        $('#movie').typeahead({
+            minLength: 3,
+            highlight: true
+        }, {
+            name: 'movies',
+            display: 'name',
+            source: movies
+        }).on('typeahead:select', function (e, movie){
+            console.log(movie);
+        });
     });
     </script>
 }

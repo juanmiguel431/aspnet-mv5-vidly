@@ -25,14 +25,26 @@ namespace Vidly.Controllers.Api
             if (!ModelState.IsValid)
                 return BadRequest();
 
-            var customer = _context.Customers.Single(p => p.Id == model.CustomerId);
+            if (!model.MovieIds.Any())
+                return BadRequest("You must specify unless one movie to rent.");
+            
+            var customer = _context.Customers.SingleOrDefault(p => p.Id == model.CustomerId);
+
+            if (customer == null)
+                return BadRequest("CustomerId is not valid.");
 
             var movies = _context.Movies.Where(p => model.MovieIds.Contains(p.Id)).ToList();
 
+            if (model.MovieIds.Count != movies.Count)
+                return BadRequest("One or more movies Id are invalid.");
+
             var rentals = new List<Rental>();
-            foreach (var movieId in model.MovieIds)
+            foreach (var movie in movies)
             {
-                var movie = movies.First(p => p.Id == movieId);
+                if (movie.Available == 0)
+                    return BadRequest($"Movie {movie.Id} is not available");
+
+                movie.Available--;
                 
                 rentals.Add(new Rental
                 {

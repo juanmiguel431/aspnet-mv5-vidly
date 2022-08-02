@@ -49,6 +49,7 @@ namespace Vidly.Controllers.Api
                 return BadRequest();
 
             var movie = _mapper.Map<Movie>(movieDto);
+            movie.Available = movie.Stock;
 
             _context.Movies.Add(movie);
             _context.SaveChanges();

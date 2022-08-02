@@ -10,7 +10,7 @@ namespace Vidly.Models
         public Customer Customer { get; set; }
         
         [Required]
-        public long CustomerId { get; set; }
+        public int CustomerId { get; set; }
         
         public Movie Movie { get; set; }
         

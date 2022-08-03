@@ -29,10 +29,10 @@ textarea {
     border-color: #fff
 }
 
-.field-validation-error, .validation-summary-errors {
+.field-validation-error, label.error, .validation-summary-errors {
     color: red;
 }
 
-.input-validation-error {
+.input-validation-error, input.error {
     border: 2px solid red;
 }

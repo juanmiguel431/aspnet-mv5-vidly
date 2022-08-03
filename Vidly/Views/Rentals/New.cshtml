@@ -5,7 +5,7 @@
 }
 
 <h2>New rental form</h2>
-<form>
+<form id="newRental">
     <div class="form-group">
         <label for="customer">Customer</label>
         <div class="tt-container">
@@ -79,6 +79,19 @@
             $('#movies').append(`<li class="list-group-item">${movie.name}</li>`);
             movieDom.typeahead('val', '');
             viewModel.movieIds.push(movie.id);
+        });
+        
+        $('#newRental').submit(function(e) {
+          e.preventDefault();
+          $.ajax({
+            url: '/api/rentals',
+            method: 'POST',
+            data: viewModel
+          }).done(function (){
+            console.log('done');  
+          }).fail(function() {
+            console.log('fail');
+          });
         });
     });
     </script>

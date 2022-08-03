@@ -88,9 +88,9 @@
             method: 'POST',
             data: viewModel
           }).done(function (){
-            console.log('done');  
+            toastr.success('Rental successfully recorded.');
           }).fail(function() {
-            console.log('fail');
+            toastr.error('Something unexpected happened.');
           });
         });
     });

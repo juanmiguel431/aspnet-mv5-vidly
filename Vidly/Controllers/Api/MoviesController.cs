@@ -22,7 +22,7 @@ namespace Vidly.Controllers.Api
         }
         
         // GET api/Movies
-        public IEnumerable<MovieDto> GetAll(string search = null)
+        public IEnumerable<MovieDto> GetAll(string search = null, bool? isAvailable = null)
         {
             var query = _context.Movies
                 .Include(p => p.MovieGenre);
@@ -30,6 +30,11 @@ namespace Vidly.Controllers.Api
             if (!string.IsNullOrWhiteSpace(search))
             {
                 query = query.Where(c => c.Name.Contains(search));
+            }
+
+            if (isAvailable.HasValue)
+            {
+                query = query.Where(m => m.Available > 0);
             }
             
             return query.ToList().Select(m => _mapper.Map<MovieDto>(m));

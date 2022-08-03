@@ -61,7 +61,7 @@
             datumTokenizer: Bloodhound.tokenizers.obj.whitespace('name'),
             queryTokenizer: Bloodhound.tokenizers.whitespace,
             remote: {
-                url: '/api/movies?search=%NAME',
+                url: '/api/movies?isAvailable=true&search=%NAME',
                 wildcard: '%NAME'
             }
         });

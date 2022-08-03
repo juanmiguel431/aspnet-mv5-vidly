@@ -49,7 +49,8 @@ namespace Vidly.Controllers.Api
                 rentals.Add(new Rental
                 {
                     Customer = customer,
-                    Movie = movie
+                    Movie = movie,
+                    DateRented = DateTime.Now
                 });
             }
 

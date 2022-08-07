@@ -105,8 +105,9 @@
                   moviesDom.empty();
                   viewModel = { movieIds: []};
                   validator.resetForm();
-                }).fail(function() {
-                  toastr.error('Something unexpected happened.');
+                }).fail(function(jqXHR, textStatus, errorThrown) {
+                    const message = jqXHR.responseJSON?.message;
+                  toastr.error(message || 'Something unexpected happened.');
                 });
                 
                 return false;

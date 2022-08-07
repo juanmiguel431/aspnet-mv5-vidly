@@ -65,6 +65,7 @@ namespace Vidly.Controllers
                 customerInDb.Birthdate = customer.Birthdate;
                 customerInDb.MembershipTypeId = customer.MembershipTypeId;
                 customerInDb.IsSubscribedToNewsLetter = customer.IsSubscribedToNewsLetter;
+                customerInDb.IsDelinquent = customer.IsDelinquent;
                 // TryUpdateModel(customerInDb, "", new [] { nameof(customerDto.Name), nameof(customerDto.Birthdate), nameof(customerDto.MembershipTypeId), nameof(customerDto.IsSubscribedToNewsLetter) });
                 // TryUpdateModel(customerInDb, "", new [] { "Name", "Birthdate", "MembershipTypeId", "IsSubscribedToNewsLetter" });
             }

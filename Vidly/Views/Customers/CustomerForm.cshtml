@@ -31,6 +31,11 @@
             @Html.CheckBoxFor(p => p.Customer.IsSubscribedToNewsLetter) Subscribed to newslatter?
         </label>
     </div>
+    <div class="checkbox">
+        <label>
+            @Html.CheckBoxFor(p => p.Customer.IsDelinquent) Is delinquent?
+        </label>
+    </div>
     @Html.HiddenFor(p => p.Customer.Id)
     @Html.AntiForgeryToken()
     <button class="btn btn-primary" type="submit">Save</button>

@@ -33,6 +33,11 @@ namespace Vidly.Controllers.Api
             if (customer == null)
                 return BadRequest("CustomerId is not valid.");
 
+            if (customer.IsDelinquent)
+            {
+                return BadRequest("This customer is flagged as delinquent.");
+            }
+            
             var movies = _context.Movies.Where(p => model.MovieIds.Contains(p.Id)).ToList();
 
             if (model.MovieIds.Count != movies.Count)

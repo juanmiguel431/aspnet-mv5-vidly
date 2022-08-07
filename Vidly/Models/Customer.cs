@@ -17,6 +17,8 @@ namespace Vidly.Models
         
         [Min18YearsIfAMember, Display(Name = "Date of birth")]
         public DateTime? Birthdate { get; set; }
+
+        public bool IsDelinquent { get; set; }
     }
 
     public interface ICustomer
